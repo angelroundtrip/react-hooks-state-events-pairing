@@ -7,26 +7,26 @@ import Comments from "./Comments"
 
 function App() {
 
+  const [data, setData]= useState(video) 
   const [showComments, setShowComments] = useState(true)
 
-  function deleteComments(){
-    showComments(!setShowComments)
-  }
+  const deleteComments = () => {
+		setShowComments(!showComments)
+	}
 
-  const [data, setData]= useState(video) 
-  
-  console.log("Here's your data:", video);
+  // console.log("Here's your data:", video);
 
   return (
     <div className="App">
       <VideoSection title={data.title} embedUrl={data.embedUrl} views={data.views} createdAt={data.createdAt}/>
+
       <Buttons upvotes={data.upvotes} downvotes={data.downvotes}/>
       
-      <button onClick={deleteComments}>{deleteComments ? 'Hide' : 'Show'} Comments</button>
+      <button onClick={deleteComments}>{showComments ? 'Hide' : 'Show'} Comments</button>
 
       <hr/>
 
-      {deleteComments && <Comments comments={data.comments}/> }
+      {showComments && <Comments comments={data.comments}/> }
 
     </div>
   );
